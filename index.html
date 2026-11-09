@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Website profil pribadi dan galeri keterampilan.">
+  <title>Profil Pribadi | Ninik A.</title>
+  <style>
+    :root {
+      --purple-950: #211039;
+      --purple-800: #4c2677;
+      --purple-600: #8050b8;
+      --purple-400: #b68be5;
+      --lavender: #eee5fa;
+      --ink: #30223f;
+      --muted: #766b82;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #faf8fd;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, 90%); margin: auto; }
+    header {
+      color: white;
+      background: linear-gradient(120deg, #291342, #633b91 55%, #a77bd1);
+      padding-bottom: 85px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before, header::after {
+      content: ""; position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,.08); pointer-events: none;
+    }
+    header::before { width: 330px; height: 330px; right: -90px; top: 50px; }
+    header::after { width: 180px; height: 180px; left: -75px; bottom: -80px; }
+    nav {
+      min-height: 76px; display: flex; align-items: center;
+      justify-content: space-between; gap: 20px; position: relative; z-index: 1;
+    }
+    .brand { font-size: 1.15rem; font-weight: 800; letter-spacing: .5px; }
+    .brand span { color: #e3c9ff; }
+    .nav-links { display: flex; gap: 26px; list-style: none; font-size: .94rem; }
+    .nav-links a { opacity: .9; transition: .2s; }
+    .nav-links a:hover { opacity: 1; color: #ead8ff; }
+    .hero {
+      min-height: 440px; display: grid; grid-template-columns: 1.3fr .7fr;
+      align-items: center; gap: 45px; position: relative; z-index: 1; padding-top: 35px;
+    }
+    .eyebrow {
+      display: inline-block; padding: 7px 14px; border: 1px solid #ffffff55;
+      border-radius: 30px; color: #f0e4ff; font-size: .85rem; margin-bottom: 18px;
+      background: #ffffff12;
+    }
+    h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 18px; }
+    h1 span { color: #e0c2ff; }
+    .hero p { max-width: 570px; color: #f0e8f8; font-size: 1.06rem; }
+    .hero-buttons { display: flex; gap: 13px; flex-wrap: wrap; margin-top: 28px; }
+    .btn {
+      display: inline-block; padding: 12px 21px; border-radius: 30px;
+      font-weight: 700; transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px #160b2833; }
+    .btn-light { background: white; color: var(--purple-800); }
+    .btn-outline { border: 1px solid #ffffff99; color: white; }
+    .profile-art {
+      width: min(290px, 80%); aspect-ratio: 1; justify-self: center;
+      border-radius: 42% 58% 55% 45% / 45% 43% 57% 55%;
+      background: linear-gradient(145deg, #ead8ff, #a77bd1);
+      display: grid; place-items: center; box-shadow: 0 25px 65px #170b2b55;
+      transform: rotate(3deg);
+    }
+    .profile-art .initials {
+      width: 76%; height: 76%; border: 2px solid #ffffff99; border-radius: 50%;
+      display: grid; place-items: center; color: white; font-size: 4.5rem;
+      font-weight: 800; background: linear-gradient(145deg, #8152b2, #43215f);
+      transform: rotate(-3deg);
+    }
+    section { padding: 78px 0; }
+    .section-heading { text-align: center; margin-bottom: 38px; }
+    .section-heading .mini { color: var(--purple-600); text-transform: uppercase; letter-spacing: 2px; font-size: .78rem; font-weight: 800; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--purple-950); margin: 5px 0 8px; }
+    .section-heading p { color: var(--muted); }
+    .about-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 28px; align-items: stretch; }
+    .about-highlight, .about-info, .skill-card, .gallery-card {
+      background: white; border: 1px solid #eee7f5; border-radius: 22px;
+      box-shadow: 0 12px 35px #35204b0b;
+    }
+    .about-highlight {
+      padding: 32px; color: white;
+      background: linear-gradient(145deg, #4a236f, #9366bd);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-highlight .symbol { font-size: 2.7rem; margin-bottom: 15px; }
+    .about-highlight h3 { font-size: 1.5rem; margin-bottom: 9px; }
+    .about-highlight p { color: #f1e9fa; }
+    .about-info { padding: 28px 32px; }
+    .info-row { display: flex; justify-content: space-between; gap: 20px; padding: 13px 0; border-bottom: 1px solid #f0ebf5; }
+    .info-row:last-child { border: 0; }
+    .info-row strong { color: var(--purple-800); }
+    .info-row span { text-align: right; color: var(--muted); }
+    .skills { background: linear-gradient(180deg, #f5effb, #fbf9fd); }
+    .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .skill-card { padding: 28px; display: flex; align-items: flex-start; gap: 18px; }
+    .skill-icon {
+      flex: 0 0 58px; height: 58px; display: grid; place-items: center;
+      border-radius: 17px; background: var(--lavender); font-size: 1.8rem;
+    }
+    .skill-card h3 { color: var(--purple-800); margin-bottom: 5px; }
+    .skill-card p { color: var(--muted); font-size: .94rem; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+    .gallery-card { overflow: hidden; }
+    .gallery-visual {
+      min-height: 220px; display: grid; place-items: center; position: relative;
+      background: linear-gradient(135deg, #e9dcf7, #c9afe8);
+      overflow: hidden;
+    }
+    .gallery-visual.drawing { background: linear-gradient(135deg, #d9c8ef, #f2eafb); }
+    .gallery-visual .big-emoji { font-size: 5.5rem; filter: drop-shadow(0 12px 8px #38214a22); }
+    .gallery-visual::before, .gallery-visual::after {
+      content: ""; position: absolute; width: 115px; height: 115px;
+      border: 2px solid #ffffff88; border-radius: 50%;
+    }
+    .gallery-visual::before { top: -40px; right: -25px; }
+    .gallery-visual::after { bottom: -65px; left: -30px; width: 170px; height: 170px; }
+    .gallery-caption { padding: 22px 24px; }
+    .gallery-caption h3 { color: var(--purple-800); margin-bottom: 4px; }
+    .gallery-caption p { color: var(--muted); font-size: .93rem; }
+    .note {
+      margin-top: 25px; padding: 16px 19px; border-radius: 14px;
+      background: #f5effb; color: #655476; font-size: .9rem;
+    }
+    footer {
+      color: #eee4f8; text-align: center; padding: 27px 0;
+      background: linear-gradient(110deg, #25113a, #56317b);
+      font-size: .9rem;
+    }
+    @media (max-width: 720px) {
+      .nav-links { gap: 13px; font-size: .82rem; }
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 45px; gap: 35px; }
+      .hero p { margin: auto; }
+      .hero-buttons { justify-content: center; }
+      .profile-art { width: 210px; grid-row: 1; }
+      .about-grid, .skill-grid, .gallery-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+    }
+    @media (max-width: 420px) {
+      nav { align-items: flex-start; flex-direction: column; padding: 18px 0; }
+      .nav-links { width: 100%; justify-content: space-between; }
+      .info-row { flex-direction: column; gap: 2px; }
+      .info-row span { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <header id="beranda">
+    <div class="container">
+      <nav>
+        <a class="brand" href="#beranda">NINIK<span>.</span></a>
+        <ul class="nav-links">
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#skill">Keterampilan</a></li>
+          <li><a href="#galeri">Galeri</a></li>
+        </ul>
+      </nav>
+      <div class="hero">
+        <div>
+          <span class="eyebrow">Website Profil Pribadi</span>
+          <h1>Halo, saya <span>Ninik A.</span></h1>
+          <p>Selamat datang di website pribadi saya. Saya senang mencoba hal baru, mengembangkan keterampilan, memasak, dan menuangkan kreativitas melalui gambar.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-light" href="#tentang">Kenali Saya</a>
+            <a class="btn btn-outline" href="#galeri">Lihat Galeri</a>
+          </div>
+        </div>
+        <div class="profile-art" aria-label="Inisial profil">
+          <div class="initials">NA</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="tentang">
+      <div class="container">
+        <div class="section-heading">
+          <span class="mini">Perkenalan</span>
+          <h2>Tentang Saya</h2>
+          <p>Sekilas informasi dan hal-hal yang saya sukai.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-highlight">
+            <div class="symbol">✦</div>
+            <h3>Terus Belajar & Berkarya</h3>
+            <p>Saya percaya setiap pengalaman dapat menjadi kesempatan untuk belajar, berkreasi, dan menjadi lebih baik.</p>
+          </div>
+          <div class="about-info">
+            <div class="info-row"><strong>Nama</strong><span>Ninik A.</span></div>
+            <div class="info-row"><strong>Domisili</strong><span>Blitar, Jawa Timur</span></div>
+            <div class="info-row"><strong>Keterampilan</strong><span>Memasak</span></div>
+            <div class="info-row"><strong>Hobi</strong><span>Menggambar</span></div>
+            <div class="info-row"><strong>Minat</strong><span>Kreativitas dan hal baru</span></div>
+          </div>
+        </div>
+        <p class="note">Catatan keamanan: untuk website publik di GitHub, sebaiknya jangan mencantumkan alamat rumah lengkap, nomor HP, atau email pribadi. Informasi tersebut sengaja tidak ditampilkan agar privasi tetap terjaga.</p>
+      </div>
+    </section>
+
+    <section class="skills" id="skill">
+      <div class="container">
+        <div class="section-heading">
+          <span class="mini">Yang Saya Kuasai</span>
+          <h2>Keterampilan & Hobi</h2>
+          <p>Dua hal yang saya sukai dan terus ingin kembangkan.</p>
+        </div>
+        <div class="skill-grid">
+          <article class="skill-card">
+            <div class="skill-icon">🍳</div>
+            <div><h3>Memasak</h3><p>Senang menyiapkan makanan, mencoba resep, dan belajar mengolah berbagai bahan menjadi hidangan yang menarik.</p></div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon">🎨</div>
+            <div><h3>Menggambar</h3><p>Menyalurkan ide dan imajinasi melalui garis, bentuk, serta warna dalam sebuah gambar.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeri">
+      <div class="container">
+        <div class="section-heading">
+          <span class="mini">Karya & Aktivitas</span>
+          <h2>Galeri Skill</h2>
+          <p>Gambaran kegiatan yang mencerminkan keterampilan dan hobi saya.</p>
+        </div>
+        <div class="gallery-grid">
+          <article class="gallery-card">
+            <div class="gallery-visual"><span class="big-emoji">🍲</span></div>
+            <div class="gallery-caption"><h3>Cooking Corner</h3><p>Belajar memasak dan mencoba kreasi hidangan.</p></div>
+          </article>
+          <article class="gallery-card">
+            <div class="gallery-visual drawing"><span class="big-emoji">🖌️</span></div>
+            <div class="gallery-caption"><h3>Drawing Corner</h3><p>Menggambar sebagai media untuk mengekspresikan kreativitas.</p></div>
+          </article>
+        </div>
+        <p class="note">Ingin menampilkan karya asli? Ganti ilustrasi emoji di atas dengan foto hasil masakan atau gambar buatan sendiri.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Ninik A. · Website Profil Pribadi</div>
+  </footer>
+</body>
+</html>
